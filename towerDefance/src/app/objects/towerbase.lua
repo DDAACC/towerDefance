@@ -45,7 +45,7 @@ function towerbase:build()
     	self.buildRate=self.buildRate+100/60/2
     	self.fill:setPercentage(self.buildRate)
     else
-        self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[1]):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
+        self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[1],#self:getParent().tower+1):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
         self:getParent().tower[#self:getParent().tower]:beginAtk()
         self:setVisible(false)
         scheduler.unscheduleGlobal(self.buildtimer)     

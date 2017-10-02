@@ -4,8 +4,10 @@ tower01=class("tower",function ()
 	return display.newSprite()
 end)
 
-function tower01:ctor(tower_info)
-   
+function tower01:ctor(tower_info,t)
+
+    
+   self.towerid=t
    self.name=tower_info.name 
    self.atk=tower_info.atk
    self.atkSpeed=tower_info.atkSpeed
@@ -16,8 +18,13 @@ function tower01:ctor(tower_info)
    self.atkNumberFlag=0  
    self.x1=nil
    self.y1=nil
-
+   self.atkRangeCircle=nil
    local object=display.newSprite(tower_info.pic):addTo(self)
+   self:setTouchEnabled(true)
+   self:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(event)
+        return self:onTouch(event)
+   end)
+
 end
 
 function tower01:beginAtk()
@@ -64,6 +71,34 @@ function tower01:atkCheck()
       end
 
    end
+
+end
+
+function tower01:onTouch(event)
+    
+    if event.name=="began" then
+        if self.atkRangeCircle==nil then
+               self.atkRangeCircle = display.newCircle(self.atkRange,
+               {x = self:getPositionX(), y = self:getPositionY(),
+               fillColor = cc.c4f(1, 0, 0, 0),
+               borderColor = cc.c4f(1, 1, 1, 1),
+               borderWidth = 0.5}):addTo(self:getParent())
+               local move1=cc.FadeTo:create(0.5,0)
+               local move2=cc.FadeTo:create(0.5,255)
+               local sequence=cc.Sequence:create(move1,move2)
+               transition.execute(self.atkRangeCircle,cc.RepeatForever:create(sequence))
+               
+        else
+              self.atkRangeCircle:setVisible(true)
+        end
+        for i=1,#self:getParent().tower do
+            if self.towerid ~= i then
+
+              
+                  self:getParent().tower[i].atkRangeCircle:setVisible(false)
+            end
+        end
+    end
 
 end
 

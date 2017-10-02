@@ -77,6 +77,7 @@ function MainScene:ctor()
 
     self:addCollision()
 
+
     
     self:GameInit()
     self:GameStart()
