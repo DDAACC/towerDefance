@@ -10,6 +10,7 @@ function messageBoard:ctor()
 end
 
 function messageBoard:monsterShow(i)
+	self:reBuild()
 	self.monsterIndex=i
     local name=self:getParent().monster[i].name
     local hp=self:getParent().monster[i].hp
@@ -29,7 +30,8 @@ end
 
 
 function messageBoard:towerShow(i)
-   
+
+    self:reBuild()
     local name=self:getParent().tower[i].name
     local atk=self:getParent().tower[i].atk
     self.label:setString(name.. " atk "..atk)

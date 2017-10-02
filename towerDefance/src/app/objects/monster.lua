@@ -97,8 +97,10 @@ function monster:endRun()
 end
 
 function monster:deathFunc()   --死亡处理
+    self.hpNow=0
     self.death=1
     self:setVisible(false)
+    self:setTouchEnabled(false)
     scheduler.unscheduleGlobal(self.movetimer)
     scheduler.unscheduleGlobal(self.skilltimer)
 end
