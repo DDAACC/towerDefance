@@ -77,17 +77,17 @@ end
 function tower01:onTouch(event)
     
     if event.name=="began" then
+        self:getParent().message:towerShow(self.towerid)
         if self.atkRangeCircle==nil then
                self.atkRangeCircle = display.newCircle(self.atkRange,
                {x = self:getPositionX(), y = self:getPositionY(),
                fillColor = cc.c4f(1, 0, 0, 0),
-               borderColor = cc.c4f(1, 1, 1, 1),
+               borderColor = cc.c4f(1, 0, 0, 1),
                borderWidth = 0.5}):addTo(self:getParent())
                local move1=cc.FadeTo:create(0.5,0)
                local move2=cc.FadeTo:create(0.5,255)
                local sequence=cc.Sequence:create(move1,move2)
-               transition.execute(self.atkRangeCircle,cc.RepeatForever:create(sequence))
-               
+               transition.execute(self.atkRangeCircle,cc.RepeatForever:create(sequence))               
         else
               self.atkRangeCircle:setVisible(true)
         end

@@ -9,7 +9,7 @@ data_monster[1]={
 }
 
 data_monster[2]={
-	name="变形虫",
+	name="精英变形虫",
 	hp=200,
 	speed=150,
 	dmg=10,

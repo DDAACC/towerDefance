@@ -9,6 +9,7 @@ local Tower=require("app.objects.tower")
 local Object=require("app.objects.object")
 require("app.objects.towerbase")
 require("app.objects.buildControl")
+require("app.objects.messageBoard")
 
 local MainScene = class("MainScene", function()
     return display.newPhysicsScene("MainScene")
@@ -49,7 +50,8 @@ function MainScene:ctor()
     self.label = cc.LabelTTF:create("Hello World", "Arial", 20):addTo(self):pos(600,600)
     self.ylabel = cc.LabelTTF:create("第1波", "Arial", 20):addTo(self):pos(500,600)
 
-    buildControl:new():addTo(self):pos(800,40)
+    buildControl.new():addTo(self):pos(500,400)
+    self.message=messageBoard.new():addTo(self):pos(150,600)
 
 
     self.btSystem=battleSystem.new(nil,nil)
@@ -77,10 +79,16 @@ function MainScene:ctor()
 
     self:addCollision()
 
+    self:setTouchEnabled(true)
+    self:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(event)
+        return self:onTouch(event)
+    end)
+
 
     
     self:GameInit()
     self:GameStart()
+
 
 
 
@@ -252,6 +260,20 @@ function MainScene:addCollision()                   --怪的FLGA为1 ， 塔的F
     local eventDispatcher = cc.Director:getInstance():getEventDispatcher()
 
     eventDispatcher:addEventListenerWithFixedPriority(contactListener, 1)
+
+end
+
+function MainScene:onTouch(event)
+
+     if event.name=="began" then
+          
+         for i=1,#self.tower do
+             self.tower[i].atkRangeCircle:setVisible(false)
+         end
+
+         self.message:reBuild()
+
+     end
 
 end
 

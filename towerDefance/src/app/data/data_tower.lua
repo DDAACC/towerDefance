@@ -10,8 +10,4 @@ data_tower[1]={
 
 
 
-
-
-
-
 return data_tower

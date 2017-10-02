@@ -43,7 +43,19 @@ function monster:ctor(monster_info,id)
     body:setContactTestBitmask(0x1111)
     body:setCollisionBitmask(0x0000)
 
+    self:setTouchEnabled(true)
+    self:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(event)
+        return self:onTouch(event)
+   end)
+
     self:setPhysicsBody(body)
+end
+
+function monster:onTouch(event)
+    
+    if event.name=="began" then
+         self:getParent().message:monsterShow(self.id)
+    end 
 end
 
 
