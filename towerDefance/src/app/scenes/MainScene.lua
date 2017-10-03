@@ -40,12 +40,13 @@ end
 
 
 function MainScene:ctor()
-
+   
+    -- audio.playMusic("background.mp3")
+    self.bg=display.newSprite("background.png"):addTo(self):pos(960,352)
     self.world=self:getPhysicsWorld()
     self.world:setGravity(cc.p(0,0))
     -- self.world:setDebugDrawMask(cc.PhysicsWorld.DEBUGDRAW_ALL)
 
-    display.newSprite("background.jpg"):pos(display.cx,display.cy):addTo(self):setVisible(false)
 
     self.label = cc.LabelTTF:create("Hello World", "Arial", 20):addTo(self):pos(600,600)
     self.ylabel = cc.LabelTTF:create("第1波", "Arial", 20):addTo(self):pos(500,600)
@@ -65,9 +66,17 @@ function MainScene:ctor()
     self.object={}
      
     self.monsterpath={
-    [1]={20,200},
-    [2]={600,200},
-    [3]={600,620}
+    [1]={96,32},
+    [2]={736,32},
+    [3]={736,224},
+    [4]={416,224},
+    [5]={416,352},
+    [6]={864,352},
+    [7]={864,480},
+    [8]={544,480},
+    [9]={544,672},
+    [10]={1184,672},
+    [11]={1184,32}
     }
 
     self.timer01=nil
@@ -88,6 +97,8 @@ function MainScene:ctor()
     
     self:GameInit()
     self:GameStart()
+
+
 
 
 
@@ -183,7 +194,7 @@ function MainScene:WaveControl()--出兵系统
 
    
    if #self.wave[self.level] > 0 then
-       self.monster[#self.monster+1]=Monster.new(data_monster[self.wave[self.level][1]],#self.monster+1):addTo(self):pos(20,620)
+       self.monster[#self.monster+1]=Monster.new(data_monster[self.wave[self.level][1]],#self.monster+1):addTo(self):pos(96,704-20)
        self.monster[#self.monster].path=clone(self.monsterpath)
        self.monster[#self.monster]:run()
        table.remove(self.wave[self.level],1)

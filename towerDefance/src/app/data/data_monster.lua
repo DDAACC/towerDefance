@@ -3,9 +3,9 @@ local data_monster={}
 data_monster[1]={
 	name="1级怪",
 	hp=50,
-	speed=50,
+	speed=150,
 	dmg=5,
-	pic="monster02.png"
+	pic={"monster01-up.png","monster01-down.png","monster01-left.png","monster01-right.png"}
 }
 
 data_monster[2]={

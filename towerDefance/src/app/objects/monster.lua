@@ -17,13 +17,14 @@ function monster:ctor(monster_info,id)
 	  self.direction=0
     self.death=0
     self.visible=true
+    self.pic=monster_info.pic
 
     self.movetimer=nil
     self.skilltimer=nil
 
     self.dmg=monster_info.dmg
     self.life=2
-	  self.object=display.newSprite(monster_info.pic):addTo(self)
+	  self.object=display.newSprite(self.pic[2]):addTo(self)
     self.progressbg=display.newSprite("p2.png")
     self.fill=display.newProgressTimer("p1.png",display.PROGRESS_TIMER_BAR)
     self.fill:setMidpoint(cc.p(0,0.5))
@@ -33,7 +34,7 @@ function monster:ctor(monster_info,id)
 
     self.progressbg:addChild(self.fill)
     self.fill:setPercentage(100)
-    self.progressbg:addTo(self):pos(1,20)
+    self.progressbg:addTo(self):pos(-1,20)
 
     self.skilltime1=1
 
@@ -177,24 +178,28 @@ function monster:moveDt()
                              else
                                 if self.path[2][1]>=x then
                                    self.direction=4
+                                   self.object:setTexture(self.pic[4])
                                 else
                                    self.direction=3
+                                   self.object:setTexture(self.pic[3])
                                 end
                              end
                              table.remove(self.path,1)
                          end
                          
                   elseif self.direction==2 then
-                         self:moveDown(dt)
-                         if y<=y2 then
+                       self:moveDown(dt)
+                       if y<=y2 then
 
                        if #self.path==1 then
                            self.direction=0
                        else
                            if self.path[2][1]>=x then
                             self.direction=4
+                            self.object:setTexture(self.pic[4])
                            else
                             self.direction=3
+                            self.object:setTexture(self.pic[3])
                            end
                        end
                        table.remove(self.path,1)
@@ -204,33 +209,37 @@ function monster:moveDt()
                          self:moveLeft(dt)
                        if x<=x2 then
 
-                       if #self.path==1 then
-                           self.direction=0
-                       else
-                           if self.path[2][1]>=y then
-                            self.direction=1
-                           else
-                            self.direction=2
-                           end
-                       end
-                       table.remove(self.path,1)
+                         if #self.path==1 then
+                             self.direction=0
+                         else
+                             if self.path[2][2]>=y then
+                              self.direction=1
+                              self.object:setTexture(self.pic[1])
+                             else
+                              self.direction=2
+                              self.object:setTexture(self.pic[2])
+                             end
+                         end
+                         table.remove(self.path,1)
                     end
 
                   elseif self.direction==4 then
                        self:moveRight(dt)
                        if x>=x2 then
 
-                       if #self.path==1 then
-                           self.direction=0
-                       else
-                           if self.path[2][1]>=y then
-                            self.direction=1
-                           else
-                            self.direction=2
-                           end
+                             if #self.path==1 then
+                                self.direction=0
+                             else
+                                if self.path[2][2]>=y then
+                                   self.direction=1
+                                   self.object:setTexture(self.pic[1])
+                                else
+                                   self.direction=2
+                                   self.object:setTexture(self.pic[2])
+                                end
+                             end
+                             table.remove(self.path,1)
                        end
-                       table.remove(self.path,1)
-                    end
                   end
 
             end
