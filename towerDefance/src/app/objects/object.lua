@@ -5,7 +5,7 @@ fly01=class("fly01",function ()
 	return display.newSprite()
 end)
 
-function fly01:ctor(targetIndex)
+function fly01:ctor(targetIndex,atk,crit)
 	
     self.index=targetIndex --攻击目标在Monster table中的序列
     self:setTag(1)
@@ -16,6 +16,9 @@ function fly01:ctor(targetIndex)
 
     self.x1=nil
     self.x2=nil
+
+    self.atk=atk
+    self.crit=crit
 
     self.speed=300
     self.timer=nil
@@ -79,13 +82,12 @@ function fly01:collision(t)
 
 	    if self:getParent().monster[self.index].death ==0  then
 				
-		        self:getParent().monster[self.index].hpNow=self:getParent().monster[self.index].hpNow-20
+		        self:getParent().monster[self.index].hpNow=self:getParent().monster[self.index].hpNow-self.atk
 		        self:getParent().monster[self.index]:updateHp()
 
 		        if self:getParent().monster[self.index].hpNow <= 0 then                
 		        	 self:getParent().monster[self.index]:deathFunc()
 		        	 self:getParent().money=self:getParent().money+10
-		        	 self:getParent().zlabel:setString("金币"..self:getParent().money)
 		        end
 
 		end

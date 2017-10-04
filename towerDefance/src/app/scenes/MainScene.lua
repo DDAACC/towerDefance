@@ -9,7 +9,7 @@ local Tower=require("app.objects.tower")
 local Object=require("app.objects.object")
 require("app.objects.towerbase")
 require("app.objects.buildControl")
-require("app.objects.messageBoard")
+require("app.objects.title")
 
 local MainScene = class("MainScene", function()
     return display.newPhysicsScene("MainScene")
@@ -42,17 +42,14 @@ end
 function MainScene:ctor()
    
     -- audio.playMusic("background.mp3")
-    self.bg=display.newSprite("background.png"):addTo(self):pos(960,352)
+    self.bg=display.newSprite("background.png"):addTo(self):pos(display.cx,display.cy)
     self.world=self:getPhysicsWorld()
     self.world:setGravity(cc.p(0,0))
     -- self.world:setDebugDrawMask(cc.PhysicsWorld.DEBUGDRAW_ALL)
 
+    self.ylabel = cc.LabelTTF:create("第1波", "Arial", 20):addTo(self):pos(1165,870)
 
-    self.label = cc.LabelTTF:create("Hello World", "Arial", 20):addTo(self):pos(600,600)
-    self.ylabel = cc.LabelTTF:create("第1波", "Arial", 20):addTo(self):pos(500,600)
-
-    buildControl.new():addTo(self):pos(500,400)
-    self.message=messageBoard.new():addTo(self):pos(150,600)
+    buildControl.new():addTo(self):pos(1000,600)
 
 
     self.btSystem=battleSystem.new(nil,nil)
@@ -83,15 +80,14 @@ function MainScene:ctor()
     self.timer02=nil
     self.wavetimer=nil
 
-    self.label:setString("剩余血量 "..self.hp)
-    self.zlabel = cc.LabelTTF:create("金币"..self.money, "Arial", 20):addTo(self):pos(750,600)
-
     self:addCollision()
 
     self:setTouchEnabled(true)
     self:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(event)
         return self:onTouch(event)
     end)
+
+    self.title=title.new(self.hp,self.money):addTo(self):pos(0,710)
 
 
     
@@ -186,7 +182,7 @@ end
 
 function MainScene:MoneyControl()
      self.money=self.money+1
-     self.zlabel:setString("金币"..self.money)
+     self.title:setMoney(self.money)
 end
 
 
@@ -277,12 +273,11 @@ end
 function MainScene:onTouch(event)
 
      if event.name=="began" then
-          
+
+         self.title:boardInit()
          for i=1,#self.tower do
              self.tower[i].atkRangeCircle:setVisible(false)
          end
-
-         self.message:reBuild()
 
      end
 

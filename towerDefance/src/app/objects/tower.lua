@@ -14,12 +14,16 @@ function tower01:ctor(tower_info,t)
    self.atkSpeedFlag=tower_info.atkSpeed
    self.atkRange=tower_info.atkRange
    self.atkTimer=nil  
-   self.atkNumber=2
+   self.atkNumber=tower_info.atkNum
+   self.pic=tower_info.pic
    self.atkNumberFlag=0  
+   self.crit=tower_info.crit
+   self.introduction=tower_info.introduction
+   self.skill=tower_info.skill
    self.x1=nil
    self.y1=nil
    self.atkRangeCircle=nil
-   local object=display.newSprite(tower_info.pic):addTo(self)
+   local object=display.newSprite(self.pic):addTo(self)
    self:setTouchEnabled(true)
    self:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(event)
         return self:onTouch(event)
@@ -57,7 +61,7 @@ function tower01:atkCheck()
 
                 if distance <= self.atkRange and self:getParent().monster[i].visible==true then
 
-                   self:getParent().object[#self:getParent().object+1]=fly01.new(i):pos(x,y):addTo(self:getParent())
+                   self:getParent().object[#self:getParent().object+1]=fly01.new(i,self.atk,self.crit):pos(x,y):addTo(self:getParent())
      
                 	 self.atkSpeedFlag=self.atkSpeed
                 	 self.atkNumberFlag=self.atkNumberFlag+1
@@ -77,7 +81,9 @@ end
 function tower01:onTouch(event)
     
     if event.name=="began" then
-        self:getParent().message:towerShow(self.towerid)
+
+        self:getParent().title:showTower(self.towerid)
+
         if self.atkRangeCircle==nil then
                self.atkRangeCircle = display.newCircle(self.atkRange,
                {x = self:getPositionX(), y = self:getPositionY(),
@@ -92,9 +98,7 @@ function tower01:onTouch(event)
               self.atkRangeCircle:setVisible(true)
         end
         for i=1,#self:getParent().tower do
-            if self.towerid ~= i then
-
-              
+            if self.towerid ~= i then              
                   self:getParent().tower[i].atkRangeCircle:setVisible(false)
             end
         end

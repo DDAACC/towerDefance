@@ -61,7 +61,6 @@ function towerbase:onTouch(event)
         if self.touchTime==0 then
         	self.hasBuild=true
         	self:getParent().money=self:getParent().money-40
-        	self:getParent().zlabel:setString("金币"..self:getParent().money)
 	    	self.buildtimer=scheduler.scheduleUpdateGlobal(handler(self,self.build))
 	    	self.base:setVisible(false)
 	    	self.touchTime=1

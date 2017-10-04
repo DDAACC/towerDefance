@@ -18,6 +18,8 @@ function monster:ctor(monster_info,id)
     self.death=0
     self.visible=true
     self.pic=monster_info.pic
+    self.skill=monster_info.skill
+    self.introduction=monster_info.introduction
 
     self.movetimer=nil
     self.skilltimer=nil
@@ -47,7 +49,7 @@ function monster:ctor(monster_info,id)
     self:setTouchEnabled(true)
     self:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(event)
         return self:onTouch(event)
-   end)
+    end)
 
     self:setPhysicsBody(body)
 end
@@ -55,7 +57,7 @@ end
 function monster:onTouch(event)
     
     if event.name=="began" then
-         self:getParent().message:monsterShow(self.id)
+         self:getParent().title:showMonster(self.id)
     end 
 end
 
@@ -143,7 +145,8 @@ function monster:moveDt()
                 if self:getParent().hp <=0 then
                      self:getParent().hp=0
                 end
-                self:getParent().label:setString("剩余血量"..self:getParent().hp)
+
+                self:getParent().title:setHp(self:getParent().hp)
                 
                 self:deathFunc()
 

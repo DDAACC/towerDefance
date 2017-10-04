@@ -2,10 +2,12 @@ local data_monster={}
 
 data_monster[1]={
 	name="1级怪",
-	hp=50,
-	speed=150,
+	hp=60,
+	speed=50,
 	dmg=5,
-	pic={"monster01-up.png","monster01-down.png","monster01-left.png","monster01-right.png"}
+	pic={"monster01-up.png","monster01-down.png","monster01-left.png","monster01-right.png"},
+	introduction="描述:绿毛虫,拥有较低的生命值和移动速度",
+	skill="技能:无"
 }
 
 data_monster[2]={
