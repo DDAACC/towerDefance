@@ -40,7 +40,7 @@ end
 
 
 function MainScene:ctor()
-   
+
     -- audio.playMusic("background.mp3")
     self.bg=display.newSprite("background.png"):addTo(self):pos(display.cx,display.cy)
     self.world=self:getPhysicsWorld()

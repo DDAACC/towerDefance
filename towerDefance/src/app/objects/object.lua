@@ -82,7 +82,11 @@ function fly01:collision(t)
 
 	    if self:getParent().monster[self.index].death ==0  then
 				
-		        self:getParent().monster[self.index].hpNow=self:getParent().monster[self.index].hpNow-self.atk
+				local dmg=self.atk
+				if math.random() < self.crit then
+                      dmg=dmg*2
+				end
+		        self:getParent().monster[self.index].hpNow=self:getParent().monster[self.index].hpNow-dmg
 		        self:getParent().monster[self.index]:updateHp()
 
 		        if self:getParent().monster[self.index].hpNow <= 0 then                

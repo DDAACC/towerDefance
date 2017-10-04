@@ -2,7 +2,7 @@ local data_monster={}
 
 data_monster[1]={
 	name="1级怪",
-	hp=60,
+	hp=600,
 	speed=50,
 	dmg=5,
 	pic={"monster01-up.png","monster01-down.png","monster01-left.png","monster01-right.png"},
