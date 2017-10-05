@@ -49,10 +49,8 @@ function MainScene:ctor()
 
     self.ylabel = cc.LabelTTF:create("第1波", "Arial", 20):addTo(self):pos(1165,870)
 
-    buildControl.new():addTo(self):pos(1000,600)
+    
 
-
-    self.btSystem=battleSystem.new(nil,nil)
     self.wave={}
     self.tower={}
     self.monster={}
@@ -60,6 +58,7 @@ function MainScene:ctor()
     self.level=1
     self.hp=100
     self.money=200
+    self.buidSelect=nil
     self.object={}
      
     self.monsterpath={
@@ -88,6 +87,14 @@ function MainScene:ctor()
     end)
 
     self.title=title.new(self.hp,self.money):addTo(self):pos(0,710)
+
+
+    buildControl.new(1):addTo(self):pos(770,820)
+    buildControl.new(2):addTo(self):pos(820,820)
+    buildControl.new(3):addTo(self):pos(870,820)
+    buildControl.new(4):addTo(self):pos(770,770)
+    buildControl.new(5):addTo(self):pos(820,770)
+    buildControl.new(6):addTo(self):pos(870,770)
 
 
     
@@ -279,7 +286,13 @@ function MainScene:onTouch(event)
              self.tower[i].atkRangeCircle:setVisible(false)
          end
 
+         for i=1,#self.towerbase do
+             self.towerbase[i]:setVisible(false)
+             self.towerbase[i]:setTouchEnabled(false)
+         end
+
      end
+
 
 end
 

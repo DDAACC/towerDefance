@@ -105,6 +105,3 @@ function tower01:onTouch(event)
     end
 
 end
-
-
-return tower01

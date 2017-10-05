@@ -1,4 +1,5 @@
 require("app.objects.tower")
+local data_tower=require("app.data.data_tower")
 local scheduler = require(cc.PACKAGE_NAME .. ".scheduler")
 local data_tower=require("app.data.data_tower")
 towerbase=class("towerbase",function ()
@@ -45,7 +46,26 @@ function towerbase:build()
     	self.buildRate=self.buildRate+100/60/2
     	self.fill:setPercentage(self.buildRate)
     else
-        self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[1],#self:getParent().tower+1):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
+        local index=self:getParent().buildSelect
+        print(index)
+        if index==1 then
+            self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[1],#self:getParent().tower+1):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
+        end
+        if index==2 then
+            self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[2],#self:getParent().tower+1):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
+        end
+        if index==3 then
+            self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[3],#self:getParent().tower+1):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
+        end
+        if index==4 then
+            self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[4],#self:getParent().tower+1):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
+        end
+        if index==5 then
+            self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[5],#self:getParent().tower+1):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
+        end
+        if index==6 then
+            self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[6],#self:getParent().tower+1):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
+        end
         self:getParent().tower[#self:getParent().tower]:beginAtk()
         self:setVisible(false)
         scheduler.unscheduleGlobal(self.buildtimer)     
@@ -57,10 +77,9 @@ end
 function towerbase:onTouch(event)
 
     if event.name=="began" then
-
         if self.touchTime==0 then
         	self.hasBuild=true
-        	self:getParent().money=self:getParent().money-40
+        	self:getParent().money=self:getParent().money-data_tower[self:getParent().buildSelect].price
 	    	self.buildtimer=scheduler.scheduleUpdateGlobal(handler(self,self.build))
 	    	self.base:setVisible(false)
 	    	self.touchTime=1
@@ -71,7 +90,6 @@ function towerbase:onTouch(event)
                   end
 	    	end	      
         end
-
     end
 
 end
