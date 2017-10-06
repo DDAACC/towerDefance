@@ -61,14 +61,17 @@ function tower01:atkCheck()
 
                 if distance <= self.atkRange and self:getParent().monster[i].visible==true then
 
-                   self:getParent().object[#self:getParent().object+1]=fly01.new(i,self.atk,self.crit):pos(x,y):addTo(self:getParent())
-     
-                	 self.atkSpeedFlag=self.atkSpeed
-                	 self.atkNumberFlag=self.atkNumberFlag+1
-                	 if self.atkNumberFlag >= self.atkNumber then
-                          self.atkNumberFlag=0
-                          break
-                	 end
+                   if self:getParent().monster[i] ~= nil then
+
+                         self:getParent().object[#self:getParent().object+1]=fly01.new(i,self.atk,self.crit):pos(x,y):addTo(self:getParent())
+           
+                      	 self.atkSpeedFlag=self.atkSpeed
+                      	 self.atkNumberFlag=self.atkNumberFlag+1
+                      	 if self.atkNumberFlag >= self.atkNumber then
+                                self.atkNumberFlag=0
+                                break
+                      	 end
+                   end
 
                 end
           end

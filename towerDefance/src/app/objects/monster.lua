@@ -1,4 +1,5 @@
 local scheduler = require(cc.PACKAGE_NAME .. ".scheduler")
+require("app.data.data_monsterSkill")
 local monster=class("monster",function ()
 	return display.newSprite()
 end)
@@ -91,7 +92,7 @@ end
 
 function monster:run()
     self.movetimer=scheduler.scheduleUpdateGlobal(handler(self,self.moveDt))
-    self.skilltimer=scheduler.scheduleGlobal(handler(self,self.skilltest),4)
+    self.skilltimer=scheduler.scheduleUpdateGlobal(handler(self,self.skilltest))
 end
 
 function monster:endRun()
@@ -109,31 +110,9 @@ function monster:deathFunc()   --死亡处理
 end
 
 function monster:skilltest()
-    
-    -- if self.hpNow<self.hp then
-    --      self.hpNow=self.hpNow+0.01
-    --      self:updateHp()
-    -- end
-    
-    -- if self.skilltime1 >0 then
-  
-    --     if self.hpNow < self.hp *0.2 then
-
-    --           self.speed=self.speed+100
-
-    --           self.skilltime1=self.skilltime1-1
-    --     end
-        
-    -- end
-
-    -- if self.visible== true then
-    --      self:setVisible(false)
-    --      self.visible=false
-    -- else
-    --      self:setVisible(true)
-    --      self.visible=true
-    -- end
-
+    if self.name=="Boss" then
+        monsterSkill1(self)
+    end
 end
 
 function monster:moveDt()

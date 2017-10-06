@@ -11,7 +11,6 @@ end
 
 function MyApp:run()
     cc.FileUtils:getInstance():addSearchPath("res/")
-    audio.preloadMusic("background.mp3")
     self:enterScene("MainScene")
 end
 

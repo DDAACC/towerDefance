@@ -12,8 +12,6 @@ function fly01:ctor(targetIndex,atk,crit)
 
     local s=display.newSprite("bullet01.png"):addTo(self)
 
-    -- local p=cc.ParticleSystemQuad:create("bullet03.plist"):addTo(self):pos(0,0):scale(0.05,0.05)
-
     self.x1=nil
     self.x2=nil
 
@@ -37,7 +35,6 @@ end
 
 function fly01:flydt()
 
-	
 	local x=self:getPositionX()
 	local y=self:getPositionY()
 
@@ -79,7 +76,6 @@ function fly01:collision(t)
 
 	if self.index==t then
 
-
 	    if self:getParent().monster[self.index].death ==0  then
 				
 				local dmg=self.atk
@@ -95,7 +91,6 @@ function fly01:collision(t)
 		        end
 
 		end
-
 		        
 		scheduler.unscheduleGlobal(self.timer)
 		self:setVisible(false)

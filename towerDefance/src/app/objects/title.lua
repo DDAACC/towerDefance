@@ -72,10 +72,12 @@ function title:boardInit()
 end
 
 function title:monsterHp()
-    local hpNow=self:getParent().monster[self.monsterid].hpNow
-    local hp=self:getParent().monster[self.monsterid].hp
-    self.fill:setPercentage(hpNow/hp*100)
-    self.lhp:setString(hpNow.."/"..hp)
+	if self:getParent().monster[self.monsterid] ~= nil then
+	    local hpNow=math.ceil(self:getParent().monster[self.monsterid].hpNow)
+	    local hp=self:getParent().monster[self.monsterid].hp
+	    self.fill:setPercentage(hpNow/hp*100)
+	    self.lhp:setString(hpNow.."/"..hp)
+    end
 end
 
 function title:setMoney(i)

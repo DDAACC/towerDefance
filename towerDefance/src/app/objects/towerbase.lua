@@ -8,7 +8,7 @@ end)
 
 function towerbase:ctor(i)
     
-    self.base=display.newSprite("towerbase.png"):addTo(self)
+    self.base=display.newSprite("towerbase1.png"):addTo(self)
     self.buildRate=0
     self.buildtimer=nil
     self.touchTime=0
@@ -47,7 +47,6 @@ function towerbase:build()
     	self.fill:setPercentage(self.buildRate)
     else
         local index=self:getParent().buildSelect
-        print(index)
         if index==1 then
             self:getParent().tower[#self:getParent().tower+1]=tower01.new(data_tower[1],#self:getParent().tower+1):pos(self:getPositionX(),self:getPositionY()):addTo(self:getParent())
         end
@@ -70,6 +69,7 @@ function towerbase:build()
         self:setVisible(false)
         scheduler.unscheduleGlobal(self.buildtimer)     
     end
+
 
 end
 

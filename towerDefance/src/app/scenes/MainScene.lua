@@ -133,6 +133,12 @@ function MainScene:GameInit()--游戏初始化
    	  end
    end
 
+   if #self.object >0 then
+      for i=1,#self.object do
+           self.object[i]:removeFromParent()
+      end
+   end
+
    for i=1,#data_towerbase do
       
       self.towerbase[i]=towerbase.new(i):addTo(self):pos(data_towerbase[i][1],data_towerbase[i][2])
@@ -167,6 +173,7 @@ function MainScene:nextWave()
 
 
     self.level=self.level+1
+
     for i=1,#self.monster do
         self.monster[i]:removeFromParent()
     end

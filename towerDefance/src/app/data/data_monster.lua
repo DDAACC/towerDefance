@@ -2,7 +2,7 @@ local data_monster={}
 
 data_monster[1]={
 	name="1级怪",
-	hp=50,
+	hp=350,
 	speed=50,
 	dmg=5,
 	pic={"monster01-up.png","monster01-down.png","monster01-left.png","monster01-right.png"},
@@ -58,7 +58,7 @@ data_monster[6]={
 	dmg=99,
 	pic={"monster01-up.png","monster01-down.png","monster01-left.png","monster01-right.png"},
 	introduction="描述:1级最终boss",
-	skill="技能:无"
+	skill="技能:每秒回复180点hp"
 }
 
 
