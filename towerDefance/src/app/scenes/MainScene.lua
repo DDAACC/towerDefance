@@ -42,6 +42,7 @@ end
 function MainScene:ctor()
 
     -- audio.playMusic("background.mp3")
+    print("GitHub test")
     self.bg=display.newSprite("background.png"):addTo(self):pos(0,0):setAnchorPoint(0,0)
     self.world=self:getPhysicsWorld()
     self.world:setGravity(cc.p(0,0))

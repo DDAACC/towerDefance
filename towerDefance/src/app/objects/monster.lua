@@ -117,7 +117,6 @@ end
 
 function monster:moveDt()
            
-   
            if  self.death==0 and #self.path==0 then
                
                 self:getParent().hp=self:getParent().hp-self.dmg
